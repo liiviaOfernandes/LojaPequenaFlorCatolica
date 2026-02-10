@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pequena Flor</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(135deg,#ffe9e3,#f7d7ff);
+  display:flex;
+  justify-content:center;
+  padding:20px 8px;
+}
+
+.shop{
+  width:50%;
+  max-width:1100px;
+  background: linear-gradient(145deg,#fff0f6,#ffe1f1);
+  border-radius:30px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+  padding:25px;
+  margin:auto;
+}
+
+.header{text-align:center;padding:15px;}
+.logo{max-width:180px;height:auto;}
+
+.gallery{display:flex;gap:15px;flex-wrap:wrap;justify-content:center}
+
+.card{
+  width:220px;
+  background:#fff;
+  border-radius:15px;
+  padding:10px;
+  text-align:center;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:.3s;
+}
+.card:hover{transform:scale(1.03)}
+.card img{width:70%;border-radius:12px;}
+
+.tamanhos{
+  margin-top:10px;
+  display:none;
+  flex-direction:column;
+  gap:6px;
+}
+
+.tamanho-btn{
+  padding:6px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  cursor:pointer;
+  background:#fafafa;
+  font-size:13px;
+}
+.tamanho-btn.selected{
+  background:#de1f7c;
+  color:#fff;
+  border-color:#de1f7c;
+}
+
+.medalhas,.colors{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+
+.medalha,.color-option{cursor:pointer}
+.medalha{width:85px;text-align:center;padding:6px;border-radius:14px}
+.medalha img{width:100%;border-radius:10px}
+.medalha span{font-size:11px;color:#710028;font-weight:600}
+.medalha.selected{border:2px solid #de1f7c;background:#fff0f6}
+
+.color-option{width:32px;height:32px;border-radius:50%;border:2px solid transparent}
+.color-option.selected{border:3px solid #710028}
+
+h3{text-align:center;font-size:20px;font-weight:700;color:#a71052;margin:12px 0}
+
+.blob-btn{
+  width:40%;padding:14px;border-radius:40px;border:2px solid #a71052;
+  background:#fff;color:#a71052;font-weight:600;font-size:14px;
+  cursor:pointer;display:block;margin:14px auto;
+}
+.blob-btn:hover{background:#a71052;color:#fff}
+
+.summary{
+  margin:15px auto;width:70%;background:#fff;padding:15px;border-radius:15px;font-size:14px;
+}
+.item{margin-bottom:6px}
+.remove{background:#ffdde9;border:none;border-radius:10px;padding:2px 6px;font-size:12px;cursor:pointer;color:#a71052;margin-left:6px}
+.total{font-weight:700;margin-top:8px}
+
+@media (max-width:768px){
+  .shop{width:95%}
+  .card{width:90%}
+  .blob-btn{width:85%}
+  .summary{width:90%}
+}
+.item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.item img{
+  width:55px;
+  height:55px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid #eee;
+}
+
+</style>
+</head>
+
+<body>
+<div class="shop">
+<div class="header"><img src="logo.png" class="logo"></div>
+
+<h1 style="text-align:center;color:#a71052;font-weight:600;margin:9px 0 ">Modelos</h1>
+<h2 style="text-align:center;color:#a71052;font-weight:60;margin:8px 0">Selecione a modelo do seu laço</h2>
+<div id="galeria" class="gallery"></div>
+
+<h1 style="text-align:center;color:#a71052;font-weight:600;margin:9px 0 ">Medalha</h1>
+<h2 style="text-align:center;color:#a71052;font-weight:60;margin:8px 0">Selecione a medalha para o seu laço</h2>
+
+<div class="medalhas">
+<div class="medalha" data-medalha="Santa Teresinha"><img src="m_stc.jpeg"><span>Santa Teresinha Colorida</span></div>
+<div class="medalha" data-medalha="Santa Teresinha"><img src="m_stpb.jpeg"><span>Santa Teresinha P&B</span></div>
+<div class="medalha" data-medalha="São José"><img src="m_saojose.jpg"><span>São José</span></div>
+<div class="medalha" data-medalha="N. Sra Aparecida"><img src="m_nsaaparecida.jpg"><span>N. Srª Aparecida</span></div>
+<div class="medalha" data-medalha="N. Sra de Fátima"><img src="m_NsFP.jpeg"><span>N. Sra de Fátima</span></div>
+<div class="medalha" data-medalha="N. Sra de Fátima"><img src="m_nsfg.jpeg"><span>N. Sra de Fátima Grande</span></div>
+<div class="medalha" data-medalha="Carlo Acutis"><img src="m_ca.jpeg"><span>Carlo Acutis</span></div>
+<div class="medalha" data-medalha="São João Paulo II"><img src="m_sp2.jpeg"><span>São João Paulo II</span></div>
+<div class="medalha" data-medalha="São Tarcisio"><img src="m_starsisio.jpeg"><span>São Tarcisio</span></div>
+<div class="medalha" data-medalha="N. Sra das Graças Dourada"><img src="m_nsagd.jpeg"><span>N. Sra das Graças Dourada</span></div>
+<div class="medalha" data-medalha="N. Sra das Graças Prata"><img src="m_nsgp.jpeg"><span>N. Sra das Graças Prata</span></div>
+<div class="medalha" data-medalha="N. Sra das Graças pequena"><img src="m_nsgpc.jpeg"><span>N. Sra das Graças Pequena</span></div>
+</div>
+
+<h1 style="text-align:center;color:#a71052;font-weight:600;margin:9px 0 ">Cor</h1>
+<h2 style="text-align:center;color:#a71052;font-weight:60;margin:8px 0">Selecione a cor do seu laço</h2>
+<div class="colors">
+<div class="color-option" style="background:#f1eb77" data-color="Amarelo"></div>
+<div class="color-option" style="background:#6c432d" data-color="Marrom"></div>
+<div class="color-option" style="background:#dfcfb5" data-color="Bege"></div>
+<div class="color-option" style="background:#B76E79" data-color="Rosa"></div>
+<div class="color-option" style="background:#000" data-color="Preto"></div>
+<div class="color-option" style="background:#9E1B22" data-color="Vermelho"></div>
+<div class="color-option" style="background:#B7C9D9" data-color="Azul"></div>
+<div class="color-option" style="background:#6F8F6B" data-color="Verde"></div>
+<div class="color-option" style="background:#ffff" data-color="Branco"></div>
+</div>
+
+<button class="blob-btn" onclick="adicionarItem()">Adicionar Laço</button>
+<div class="summary" id="resumo"><b>Pedido:</b><br>Nenhum item.</div>
+<button class="blob-btn" onclick="enviarPedido()">Enviar pedido pelo WhatsApp</button>
+
+</div>
+
+<script>
+const produtos={
+"Santa Teresinha":{img:"L_st.jpg",tamanhos:[{t:"PP - 6x9cm",p:23},{t:"P - 9x15cm",p:24},{t:"M - 11x17cm",p:25},{t:"G - 12x19cm",p:28}]},
+"Nsª do Carmo":{img:"L_carmo.jpg",tamanhos:[{t:"PP - 4x6cm",p:20},{t:"P - 4,5x7cm",p:23},{t:"M - 5,5x9cm",p:24},{t:"G - 6,5x11cm",p:25}]},
+"Nsª das Graças":{img:"L_gracas.jpg",tamanhos:[{t:"PP - 3,5x6,5cm",p:23},{t:"P - 4,5x7cm",p:24},{t:"M - 5x9cm",p:25},{t:"G - 5x11cm",p:26}]},
+/*"Nsª de Fátima":{img:"fatima_p.jpg",tamanhos:[{t:"P - 9x16cm",p:22},{t:"M - 10x17",p:24},{t:"G - 11x19cm",p:25}]}*/
+};
+
+let selecionado={},carrinho=[];
+const galeria=document.getElementById("galeria");
+const resumo=document.getElementById("resumo");
+
+for(let m in produtos){
+  galeria.innerHTML+=`
+  <div class="card" onclick="abrirTamanhos(this,'${m}')">
+    <img src="${produtos[m].img}">
+    <div><b>${m}</b></div>
+    <div class="tamanhos"></div>
+  </div>`;
+}
+
+function abrirTamanhos(card,modelo){
+  document.querySelectorAll(".tamanhos").forEach(t=>t.style.display="none");
+  const area=card.querySelector(".tamanhos");
+  area.innerHTML="";
+  produtos[modelo].tamanhos.forEach(t=>{
+    area.innerHTML+=`<div class="tamanho-btn" onclick="selecionarTamanho(event,'${modelo}','${t.t}',${t.p})">${t.t} — R$ ${t.p}</div>`;
+  });
+  area.style.display="flex";
+}
+
+function selecionarTamanho(e,modelo,tamanho,preco){
+  e.stopPropagation();
+  document.querySelectorAll(".tamanho-btn").forEach(b=>b.classList.remove("selected"));
+  e.target.classList.add("selected");
+  selecionado.modelo=modelo;
+  selecionado.tamanho=tamanho;
+  selecionado.preco=preco;
+}
+
+document.querySelectorAll(".medalha").forEach(m=>m.onclick=()=>{document.querySelectorAll(".medalha").forEach(x=>x.classList.remove("selected"));m.classList.add("selected");selecionado.medalha=m.dataset.medalha;});
+document.querySelectorAll(".color-option").forEach(c=>c.onclick=()=>{document.querySelectorAll(".color-option").forEach(x=>x.classList.remove("selected"));c.classList.add("selected");selecionado.cor=c.dataset.color;});
+
+function adicionarItem(){
+if(!selecionado.modelo||!selecionado.tamanho||!selecionado.medalha||!selecionado.cor) 
+  return alert("Complete as escolhas");
+
+carrinho.push({
+  ...selecionado,
+  img: produtos[selecionado.modelo].img   // 👈 GUARDA A FOTO
+});
+
+atualizarResumo();
+}
+
+function removerItem(i){carrinho.splice(i,1);atualizarResumo();}
+
+function atualizarResumo(){
+if(carrinho.length==0){
+  resumo.innerHTML="<b>Pedido:</b><br>Nenhum item.";
+  return;
+}
+
+let html="",total=0;
+
+carrinho.forEach((i,n)=>{
+  total+=i.preco;
+
+  html+=`
+  <div class="item">
+    <img src="${i.img}">
+    <div>
+      ${n+1}. <b>${i.modelo}</b><br>
+      Tam: ${i.tamanho}<br>
+      Medalha: ${i.medalha}<br>
+      Cor: ${i.cor}<br>
+      R$ ${i.preco}
+    </div>
+    <button class="remove" onclick="removerItem(${n})">x</button>
+  </div>`;
+});
+
+resumo.innerHTML="<b>Pedido:</b><br>"+html+`<div class="total">Total: R$ ${total}</div>`;
+}
+
+
+function enviarPedido(){
+let texto="Olá, quero esses laços:%0A";
+carrinho.forEach((i,n)=>texto+=`${n+1}. ${i.modelo} ${i.tamanho} | ${i.medalha} | ${i.cor} | R$ ${i.preco}%0A`);
+window.open("https://wa.me/5534988940245?text="+texto);
+}
+</script>
+</body>
+</html>
